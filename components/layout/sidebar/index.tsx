@@ -8,9 +8,11 @@ import SidebarItem from "./sidebar-item";
 import SidebarTweetButton from "./sidebar-tweet-button";
 import useSession from "@/hooks/use-session";
 import { signOut } from "next-auth/react";
+import useUser from "@/hooks/use-user";
 
 const Sidebar = () => {
   const { data: session } = useSession();
+  const { data: currentUser } = useUser(session?.user?.id);
 
   const items = useMemo(
     () => [
@@ -24,6 +26,7 @@ const Sidebar = () => {
         href: "/notifications",
         icon: BsBellFill,
         auth: true,
+        alert: currentUser?.hasNotification,
       },
       {
         label: "Profile",
@@ -32,7 +35,7 @@ const Sidebar = () => {
         auth: true,
       },
     ],
-    [session]
+    [session, currentUser]
   );
 
   return (

@@ -61,6 +61,26 @@ export async function POST(req: Request) {
 
     updatedFollowingIds.push(userId);
 
+    try {
+      await prisma.notification.create({
+        data: {
+          body: "Someone followed you!",
+          userId,
+        },
+      });
+
+      await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          hasNotification: true,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     const updatedUser = await prisma.user.update({
       where: {
         id: session?.user?.id,
