@@ -1,4 +1,4 @@
-## Twitter Clone
+# Twitter Clone
 
 Install and dependencies and run:
 
@@ -6,10 +6,10 @@ Install and dependencies and run:
 yarn dev
 ```
 
-# .env variables:
+## .env variables:
 MONGO_URL
 
-# Built using NextJS 13 with Server Components. Technologies used:
+## Built using NextJS 13 with Server Components. Technologies used:
 - NextJS 13
 - Tailwind CSS
 - SWR for Caching
